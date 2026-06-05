@@ -5,9 +5,9 @@ import sys
 
 def print_stats(total_size, status_code):
     print("File size: {}".format(total_size))
-    for key, value in status_code.items():
-        if value > 0:
-            print("{}: {}".format(key, value))
+    for key in sorted(status_code.keys()):
+        if status_code[key] > 0:
+            print("{}: {}".format(key, status_code[key]))
 
 
 if __name__ == "__main__":
@@ -23,9 +23,7 @@ if __name__ == "__main__":
             try:
                 parts = line.split()
                 total_size += int(parts[8])
-                # "in" pour savoir si parts[6] existe dans status_code
                 if parts[7] in status_code:
-                    # on accède à la valeur via la clé
                     status_code[parts[7]] += 1
                 counter += 1
                 if counter % 10 == 0:
